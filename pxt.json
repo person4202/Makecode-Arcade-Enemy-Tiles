@@ -1,0 +1,15 @@
+{
+  "name": "enemy-tiles",
+  "version": "0.0.1",
+  "description": "Tiles that turn into enemies with modular AI and attack patterns.",
+  "license": "MIT",
+  "files": [
+    "main.ts",
+    "test.ts"
+  ],
+  "dependencies": {
+    "device": "*",
+    "status-bar": "*"
+  },
+  "public": true
+}
