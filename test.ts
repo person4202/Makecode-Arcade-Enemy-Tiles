@@ -12,31 +12,31 @@ let player = sprites.create(img`
 controller.moveSprite(player);
 scene.cameraFollowSprite(player);
 
-// A simple blank tilemap so it always compiles
-tiles.setCurrentTilemap(tilemap`level0`);
-
-// Define a tile locally so no external assets are needed
+// No invalid tilemap
+// Instead we directly build a tilemap using createTilemap()
 const triggerTile = img`
     1 1 1 1
     1 0 0 1
     1 0 0 1
     1 1 1 1
 `;
-tiles.setTilemap(tiles.createTilemap(
-    hex`1000100000000000000000000000000000000000000000000000000000000000`,
-    img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-    `,
-    [triggerTile, img`. . . .`],
-    TileScale.Sixteen
-));
+
+tiles.setTilemap(
+    tiles.createTilemap(
+        hex`08000400000000000000000000000000`,
+        img`
+            . . . . . . . .
+            . . . . . . . .
+            . . . . . . . .
+            . . . . . . . .
+        `,
+        [triggerTile, img`. . . .`],
+        TileScale.Sixteen
+    )
+);
 
 EnemyTiles.setPlayer(player);
 
-// Minimal working enemy registration
 EnemyTiles.registerEnemyTile(
     triggerTile,
     img`
