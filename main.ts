@@ -1,7 +1,4 @@
 // MakeCode Arcade Extension: Enemy Tiles + AI & Attack Patterns
-// Allows tiles to transform into enemies when the player gets close.
-// Adds modular AI patterns and attack behaviors.
-
 //% weight=100 color=#d65d0e icon="⚔️"
 //% blockNamespace="EnemyTiles" blockGap=8
 //% groups=['Setup','Enemy Registration','AI','Attack']
@@ -99,9 +96,10 @@ namespace EnemyTiles {
 
     function spawnEnemy(cfg: EnemyConfig, loc: tiles.Location) {
         const enemy = sprites.create(cfg.enemyImage, cfg.kind);
-
         tiles.placeOnTile(enemy, loc);
-        tiles.setTileAt(loc, assets.tile``);
+
+        // FIX: No missing asset
+        tiles.setTileAt(loc, img`. . . .`);
 
         if (cfg.health && (statusbars && statusbars.create)) {
             const bar = statusbars.create(20, 4, StatusBarKind.EnemyHealth);
@@ -119,8 +117,11 @@ namespace EnemyTiles {
 
         for (const cfg of configs) {
             for (const loc of tiles.getTilesByType(cfg.tile)) {
-                const dx = tiles.locationXY(loc, tiles.XY.x) - player.x;
-                const dy = tiles.locationXY(loc, tiles.XY.y) - player.y;
+                const x = tiles.locationXY(loc, tiles.XY.x) * 16 + 8;
+                const y = tiles.locationXY(loc, tiles.XY.y) * 16 + 8;
+
+                const dx = x - player.x;
+                const dy = y - player.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
                 if (dist < (cfg.triggerDistance || 32)) {
