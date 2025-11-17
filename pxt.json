@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "device": "*",
-    "status-bar": "*"
+    "pxt-status-bar": "*"
   },
   "public": true
 }
